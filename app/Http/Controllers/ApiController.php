@@ -14,7 +14,7 @@ class ApiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ApiRequest $request)
     {
         $user = User::create($request->all());
         return response()->json([
@@ -50,7 +50,7 @@ class ApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ApiRequest $request, $id)
     {
         $update = [
             'name' => $request->name,
