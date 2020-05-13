@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ApiRequest;
 use App\User;
 
 class ApiController extends Controller
@@ -55,12 +56,13 @@ class ApiController extends Controller
             'name' => $request->name,
             'age' => $request->age
         ];
-        $user = User::where('id', $id)->update($update);
+        $put = User::where('id', $id)->update($update);
+        $user = User::find($id);
         if ($user) {
             return response()->json([
                 'name' => $user->name,
                 'age' => $user->age,
-            ], 200);
+            ], 200, [], JSON_UNESCAPED_UNICODE);
         } else {
             return response()->json([
                 'message' => '対象のレコードが見つかりません',
